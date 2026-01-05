@@ -7,7 +7,9 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173","https://chatty-murex-omega.vercel.app/"],
+    // Remove the trailing slash from the Vercel URL
+    origin: ["http://localhost:5173", "https://chatty-murex-omega.vercel.app"],
+    credentials: true, // ADD THIS LINE
   },
 });
 
