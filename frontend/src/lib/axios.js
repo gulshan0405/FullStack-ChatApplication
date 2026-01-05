@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const axiosInstance = axios.create({
     // Replace localhost with your RENDER URL
-    baseURL: "https://backend-chatty-da8f.onrender.com/api/", 
+    baseURL: "https://backend-chatty-da8f.onrender.com/api", 
     withCredentials: true,
 });
 
