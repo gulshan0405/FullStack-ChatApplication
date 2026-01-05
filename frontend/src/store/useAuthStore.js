@@ -3,7 +3,9 @@ import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
 import {io} from "socket.io-client";
 
-const BASE_URL="http://localhost:5001";
+const BASE_URL = import.meta.env.MODE === "development" 
+  ? "http://localhost:5001" 
+  : "https://backend-chatty-da8f.onrender.com";
 
 export const useAuthStore = create((set,get) => ({
   authUser: null,
@@ -88,6 +90,7 @@ connectSocket:()=>{
   query:{
     userId:authUser._id,
   },
+  withCredentials: true,
  })
  socket.connect();
  set({socket:socket});
