@@ -9,7 +9,8 @@ export const generateToken = (userId, res) => {
     maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
     sameSite: "none", // REQUIRED for cross-domain (Vercel to Render)
-    secure: true,     // REQUIRED for sameSite: "none"
+    secure: true,
+    partitioned: true,     // REQUIRED for sameSite: "none"
     path: "/",        // Ensures the cookie is available for all routes
   });
 
