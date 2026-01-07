@@ -1,14 +1,11 @@
 import axios from "axios";
 
-export const axiosInstance = axios.create({
-  baseURL: "https://backend-chatty-da8f.onrender.com/api",
-  withCredentials: true,
-});
+const BASE_URL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:5001/api"
+    : "https://backend-chatty-da8f.onrender.com/api";
 
-axiosInstance.interceptors.request.use((config) => {
-    const token = localStorage.getItem("auth-token");
-    if (token) {
-      config.headers["auth-token"] = token;
-    }
-    return config;
+export const axiosInstance = axios.create({
+  baseURL: BASE_URL,
+  withCredentials: true,
 });
