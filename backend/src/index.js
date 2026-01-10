@@ -20,20 +20,31 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
 
+// API ROUTES
+app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
+
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
       "https://chatty-murex-omega.vercel.app",
-      "https://chatty-ascsfqtxt-gulshan0405s-projects.vercel.app",
+      "https://chatty-ascsfqtxt-gulshan0405s-projects.vercel.app"
     ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
 
-// API ROUTES
-app.use("/api/auth", authRoutes);
-app.use("/api/messages", messageRoutes);
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+
+
 
 // Initialize Socket.IO
 initSocket(server);
