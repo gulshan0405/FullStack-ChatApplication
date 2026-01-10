@@ -5,16 +5,11 @@ const userSocketMap = {}; // userId : socketId
 
 export function initSocket(server) {
   io = new Server(server, {
-  cors: {
-    origin: [
-      "http://localhost:5173",
-      "https://chatty-murex-omega.vercel.app",
-      "https://chatty-ascsfqtxt-gulshan0405s-projects.vercel.app"
-    ],
-    credentials: true,
-  },
-});
-
+    cors: {
+      origin: ["http://localhost:5173", "https://chatty-murex-omega.vercel.app"],
+      credentials: true,
+    },
+  });
 
   io.on("connection", (socket) => {
     console.log("User connected:", socket.id);
