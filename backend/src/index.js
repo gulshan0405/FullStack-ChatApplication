@@ -25,6 +25,8 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://chatty-murex-omega.vercel.app",
+      "https://chatty-9ffn5u0xu-gulshan0405s-projects.vercel.app", // ADD THIS
+      "https://chatty-7flp8cj5d-gulshan0405s-projects.vercel.app"  // ADD THIS
     ],
     credentials: true,
   })
