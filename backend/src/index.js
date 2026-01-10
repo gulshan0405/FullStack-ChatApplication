@@ -16,37 +16,31 @@ const server = http.createServer(app);
 
 app.set("trust proxy", 1);
 
-// CORS MUST BE FIRST
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+app.use(cookieParser());
+
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
       "https://chatty-murex-omega.vercel.app",
-      "https://chatty-ascsfqtxt-gulshan0405s-projects.vercel.app"
+      "https://chatty-ascsfqtxt-gulshan0405s-projects.vercel.app",
     ],
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-// Allow preflight
-app.options("*", cors());
-
-// JSON + FORM
-app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ extended: true, limit: "10mb" }));
-app.use(cookieParser());
-
-// ROUTES
+// API ROUTES
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
-// Socket.IO
+// Initialize Socket.IO
 initSocket(server);
 
 // Start server
 const PORT = process.env.PORT || 5001;
+
 server.listen(PORT, () => {
   console.log("Server is running on PORT:", PORT);
   connectDb();
