@@ -22,7 +22,11 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://chatty-murex-omega.vercel.app"],
+    origin: [
+      "http://localhost:5173",
+      "https://chatty-murex-omega.vercel.app",
+      "https://chatty-ascsfqtxt-gulshan0405s-projects.vercel.app",
+    ],
     credentials: true,
   })
 );
