@@ -117,8 +117,7 @@ export const updateProfile = async (req, res) => {
 
 export const checkAuth = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
-    console.log("entered in auth check")
+    // You don't need to fetch from DB again; the middleware already did it!
     res.status(200).json(req.user);
   } catch (error) {
     console.log("Error in checkAuth controller", error.message);
